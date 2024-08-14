@@ -1,0 +1,112 @@
+                              Static Website Hosting with S3 
+
+1.	Create a S3 bucket and import (HTML, CSS, JS) file that has been saved in our desktop.
+index.html-------------------------(1)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Static Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Welcome to My Static Website</h1>
+    <p>This is a simple static website hosted on Amazon S3.</p>
+    <button onclick="displayMessage()">Click Me!</button>
+    <script src="script.js"></script>
+</body>
+</html>
+
+-----------------------------------------------------------------------------------------------------------------------------------
+Styles.css----------------------------------(2)
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 50px;
+}
+
+h1 {
+    color: #333;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+----------------------------------------------------
+
+
+
+script.js--------------------------------(3)
+
+function displayMessage() {
+    alert("Hello, welcome to my website hosted on S3!");
+}
+
+
+2.	Place this 2 files (styles.css, script.js) in a single folder and html has be alone.
+
+ 
+
+Then,
+Upload this folder and file in S3 bucket,
+ 
+
+In “properties” Config the “Static website hosting”
+ 
+
+
+
+
+
+Then save it……………………..
+
+
+
+
+
+
+
+
+
+Click “Permissions”
+
+and enable Block public access (bucket settings) and Object Ownership---
+
+1.	Enable ACLs Enabled – it gives access to public
+ 
+
+Then go to “objects” and select both file and folder and click “actions”, then scroll down and “make public using ACL”
+
+Or,
+
+
+Put this command in the “bucket policy”
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PublicReadGetObject",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::your-bucket-name/*"
+    }
+  ]
+}
+
+-----------------------------------------------------
+
