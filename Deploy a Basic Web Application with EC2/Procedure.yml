@@ -1,0 +1,35 @@
+# In Linux EC2 Machine:
+
+# Update Package Lists:
+sudo apt-get update
+
+# Install Apache Web Server
+sudo apt-get install apache2 -y
+
+# After installation, Apache should start automatically. You can verify that Apache is running by visiting your instance's public IP in a web browser:
+http://your-public-ip
+
+# Navigate to the Web Directory
+cd /var/www/html/
+
+# Deploy Your HTML/CSS Website
+sudo nano index.html
+
+# Add your HTML content, for example:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Website</title>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+    <p>This is a basic HTML website deployed on an EC2 instance.</p>
+</body>
+</html>
+
+# Save the file
+# Test Your Website
+# Adjust Permissions (if needed)
+If you’re unable to edit or add files in the /var/www/html/ directory, adjust the permissions:
+sudo chown -R $USER:$USER /var/www/html
+
