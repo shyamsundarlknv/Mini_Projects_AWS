@@ -1,0 +1,90 @@
+Navigate to RDS Dashboard:
+
+In the AWS Management Console, search for "RDS" and select "RDS" from the results.
+Launch a New Database Instance:
+
+In the RDS Dashboard, click on "Create database".
+
+1.Choose a Database Creation Method: Standard Create
+2.Choose Database Engine: MySQL
+3.Template: Free tier
+# Credentials Settings
+4.DB instance identifier: Choose a name for your database instance, e.g., my-rds-db.
+Master username: Enter a username, e.g., admin.
+Master password: Enter and confirm a password.
+
+#Configure Connectivity:
+5.Virtual Private Cloud (VPC): Choose the default VPC.
+6.Subnet group: Choose the default.
+7.Public access: Choose Yes if you want to connect from outside AWS (like from your local machine).
+8.VPC security group: Create a new security group or choose an existing one that allows MySQL traffic (port 3306).
+Database Authentication:
+
+# Review your settings and click "Create database".
+
+The creation process might take a few minutes. untill that check the security group inbound and it must be TCP-3306 for MySQL/Aurora
+
+9.Download and Install MySQL Workbench (if not already installed):
+
+Click on the "+" icon to create a new connection.
+Connection Name: Enter a name for the connection, e.g., MyRDSConnection.
+Connection Method: Keep it as Standard (TCP/IP).
+Hostname: Enter the Endpoint of your RDS instance (found in the RDS Dashboard under your instance details Example"my-rds-db.cj6wgoqmm0gw.us-east-1.rds.amazonaws.com
+").
+Port: 3306 (default for MySQL).
+Username: Enter the master username you created, e.g., admin.
+Password: Click "Store in Vault…" and enter your password.
+Click "Test Connection" to verify the connection. If it’s successful, click "OK" to save.
+Double-click on your connection to open it.
+
+
+# Then open ubuntu machine:
+# Install MySQL Client:
+sudo apt-get install mysql-client
+
+# Connect to Your RDS Instance:
+mysql -h your-rds-endpoint -P 3306 -u admin -p  #(Replace your-rds-endpoint) / EX: mysql -h my-rds-db.cj6wgoqmm0gw.us-east-1.rds.amazonaws.com -P 3306 -u admin -p)
+
+#First, you need to select the database you want to work with:
+USE mydatabase;    #This command tells MySQL to set mydatabase as the current database. You should see a confirmation message that the database has been changed.
+
+# Next, you can create a table called users with the following structure:
+----------------------------------------------------------------------------------------------
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+#id: An integer that auto-increments with each new record, acting as the primary key.
+#username: A VARCHAR field with a maximum length of 50 characters, and it cannot be null.
+#email: A VARCHAR field with a maximum length of 100 characters, and it cannot be null.
+#created_at: A TIMESTAMP field that automatically sets the current timestamp when a new record is inserted.
+--------------------------------------------------------------------------------------------
+
+# Now, insert a sample record into the users table:
+INSERT INTO users (username, email) VALUES ('john_doe', 'john@example.com');
+
+# To see the data you've just inserted, run:
+SELECT * FROM users;
+
+# Update Data / If you need to update the email of the user john_doe, use the following command:
+UPDATE users SET email = 'john.doe@example.com' WHERE username = 'john_doe';
+
+# To see the data you've just inserted, run:
+SELECT * FROM users;
+
+#  Delete Data
+DELETE FROM users WHERE username = 'john_doe';
+
+
+
+
+
+
+
+
+
