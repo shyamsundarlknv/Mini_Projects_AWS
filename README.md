@@ -1,1 +1,0 @@
-# My-static-website-S3
