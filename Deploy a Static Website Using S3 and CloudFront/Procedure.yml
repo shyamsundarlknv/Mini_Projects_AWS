@@ -109,3 +109,25 @@ Put this command in the “bucket policy”
 }
 
 -----------------------------------------------------
+# Step-2:Set Up CloudFront for Content Distribution:
+
+Click on “Create Distribution.”
+Choose "Web" as the delivery method.
+Configure Origin Settings:
+
+Origin Domain Name: Select your S3 bucket from the list.
+Origin Path: Leave it empty.
+Viewer Protocol Policy: Choose "Redirect HTTP to HTTPS" to ensure secure connections.
+Configure Default Cache Behavior:
+
+Allowed HTTP Methods: Choose "GET, HEAD" (or more if needed).
+Viewer Protocol Policy: Again, select "Redirect HTTP to HTTPS."
+Distribution Settings:
+
+Price Class: Choose the regions where you want to distribute your content (e.g., "Use All Edge Locations" for global distribution).
+Alternate Domain Names (CNAMEs): If you’re using a custom domain, enter it here (e.g., www.mydomain.com).
+SSL Certificate: If using a custom domain, select “Custom SSL Certificate” and choose your certificate from AWS Certificate Manager (ACM). If you don’t have one, you’ll need to create it in ACM.
+Review and Create Distribution:
+
+Review all settings and click “Create Distribution.”
+CloudFront will take some time to propagate. Once complete, you’ll have a CloudFront domain name (e.g., d1234abcdefg.cloudfront.net).
