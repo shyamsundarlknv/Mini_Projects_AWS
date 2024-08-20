@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Data</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Student Data</h1>
+    <div id="student-form">
+        <input type="text" id="studentid" placeholder="Student ID">
+        <input type="text" id="name" placeholder="Name">
+        <input type="text" id="class" placeholder="Class">
+        <input type="number" id="age" placeholder="Age">
+        <button id="savestudent">Save Student</button>
+    </div>
+    <h2>Student List</h2>
+    <button id="getstudents">Get Students</button>
+    <table id="studentTable">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Class</th>
+            <th>Age</th>
+        </tr>
+    </table>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
