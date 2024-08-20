@@ -1,0 +1,75 @@
+Step 1: Create IAM Role for Lambda
+
+# Go to the IAM Console.
+# Click on Roles and then Create Role.
+# Choose Lambda as the trusted entity.
+# Attach the following policies:
+# AmazonDynamoDBFullAccess
+# AWSLambdaBasicExecutionRole
+# Give the role a name (e.g., LambdaDynamoDBRole) and create it.
+
+Step 2: Create DynamoDB Table
+
+# Go to the DynamoDB Console.
+# Click Create table.
+# Set the Table name to "studentData".
+# Set Partition key to "studentid (String)".
+# Leave Sort key empty.
+# Set Provisioned capacity to your preferred settings.
+# Click Create.
+
+
+Step 3: Create Lambda Functions
+1.Save Student Data Function (POST)
+# Go to the Lambda Console.
+# Click Create Function.
+# Choose Author from scratch.
+# Set the Function name to SaveStudentData.
+# Set the Runtime to Python 3.x.
+# Under Permissions, choose the existing role you created (LambdaDynamoDBRole).
+# Click Create Function.
+# Click Deploy.
+# and deploy code
+
+2.Retrieve Student Data Function (GET)
+# Follow steps 1-7 above, but name the function GetStudentData.
+# Click Deploy.
+# and deploy code
+
+Step 4: Create API Gateway
+# Go to the API Gateway Console.
+# Click Create API and choose REST API.
+# Give it a name (e.g., StudentAPI).
+# Click Create Resource and name it /students.
+# Select "POST" method under /students resource.
+*Integration type: Lambda Function
+*Lambda Region: Choose your region
+*Lambda Function: Choose SaveStudentData
+# Next Click Create Method.
+# Now, create another method under /students resource with the "GET" method.
+*Integration type: Lambda Function
+*Lambda Region: Choose your region
+*Lambda Function: Choose GetStudentData
+# Deploy the API:
+*Click on Actions > Deploy API.
+*Create a new stage named prod.
+
+
+Step 5: Configure CORS in API Gateway
+# In the API Gateway Console, select the POST method under /students.
+# Click on Method Request > HTTP Request Headers and add Content-Type.
+# Click on Actions > Enable CORS.
+# Add * in the Access-Control-Allow-Origin header or specify your S3 bucket URL.
+# Add Content-Type in Access-Control-Allow-Headers.
+# Deploy the API again.
+
+Step 6: Create an S3 Bucket and Host the Static Website
+# Go to the S3 Console.
+# Click Create Bucket.
+# Name your bucket (e.g., serverless-web-app).
+# Uncheck Block all public access.
+# Create the bucket.
+# Upload your index.html, styles.css, and script.js files.  (note update the apiurl)
+# Go to the Properties tab and enable Static website hosting.
+# and update the S3 policy
+# Set index.html as the index document.
