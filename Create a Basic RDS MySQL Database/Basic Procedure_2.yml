@@ -1,0 +1,42 @@
+CREATE DATABASE sample_db;
+USE sample_db;
+CREATE TABLE employees (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100),
+    hire_date DATE
+);
+INSERT INTO employees (first_name, last_name, email, hire_date)
+VALUES ('John', 'Doe', 'john.doe@example.com', '2023-01-01'),
+       ('Jane', 'Smith', 'jane.smith@example.com', '2023-02-01');
+
+
+
+Query the Table:
+SELECT * FROM employees;
+
+Delete the Sample Table:
+DROP TABLE employees;
+
+Delete the Sample Database:
+DROP DATABASE sample_db;
+
+
+
+Explanation:
+
+Column Definitions:
+1. id INT AUTO_INCREMENT PRIMARY KEY:
+id: The name of the column.
+INT: Specifies that the column will hold integer values.
+AUTO_INCREMENT: Automatically increases the value of this column for each new row inserted, starting from 1.
+PRIMARY KEY: Ensures that each value in this column is unique and identifies each row uniquely.
+
+2.first_name VARCHAR(50):
+first_name: The name of the column.
+VARCHAR(50): Specifies that this column will hold variable-length string data up to 50 characters.
+
+3. INSERT INTO employees (first_name, last_name, email, hire_date)
+INSERT INTO is the SQL command used to add new records (rows) to a table.
+employees (first_name, last_name, email, hire_date): Specifies the table and columns where data will be inserted.
