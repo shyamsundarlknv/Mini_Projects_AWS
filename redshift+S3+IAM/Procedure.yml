@@ -1,5 +1,5 @@
-# Create IAM for redshift to access S3
-# Create a S3 bucket and add files like movies.csv and rating.csv
+# Create IAM for redshift to access S3 
+# Create a S3 bucket and add files like movies.csv and rating.csv (you will get the data's by this website "MovieLens dataset"
 # Create a Redshift Cluster:
 Click “Create Cluster.”
 Choose the dc2.large node type (which is eligible for the free tier) and set the number of nodes to 1.
