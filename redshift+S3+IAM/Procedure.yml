@@ -1,0 +1,82 @@
+# Create IAM for redshift to access S3
+# Create a S3 bucket and add files like movies.csv and rating.csv
+# Create a Redshift Cluster:
+Click “Create Cluster.”
+Choose the dc2.large node type (which is eligible for the free tier) and set the number of nodes to 1.
+Set a cluster identifier, database name, master username, and password.
+Select your VPC and subnet, then create the cluster.
+Ensure your security group allows inbound traffic on port 5439 (the default Redshift port)
+-------------------------------------------------------------------
+Once Cluster is ready, then enter into the cluster and put id and password,
+then run this query to create a table for movies and ratings:
+----------------------------------------------------------------------
+To Create the movies Table:
+
+CREATE TABLE movies (
+    movie_id INT,
+    title VARCHAR(255),
+    genres VARCHAR(255)
+);
+
+
+----------------------------------------------------------------------------------
+Create the ratings Table:
+
+CREATE TABLE ratings (
+    user_id INT,
+    movie_id INT,
+    rating DECIMAL(2,1),
+    timestamp BIGINT
+);
+--------------------------------------------------------------------
+
+Run the Following SQL Commands to Load Data:
+Load Movies Data::
+
+COPY movies
+FROM 's3://redshiftands3/movies.csv'
+IAM_ROLE 'arn:aws:iam::222634403926:role/redshift'
+CSV IGNOREHEADER 1;
+
+# This command loads data from the movies.csv file in your S3 bucket into the movies table in Redshift.
+-----------------------------------------------------------------------------
+
+Load Ratings Data:
+
+COPY ratings
+FROM 's3://redshiftands3/ratings.csv'
+IAM_ROLE 'arn:aws:iam::222634403926:role/redshift'
+CSV IGNOREHEADER 1;
+-----------------------------------------------------------------------------
+
+then to verify:
+
+#  Verify the Data Load
+
+To check the Movies Table:
+
+
+SELECT * FROM movies LIMIT 10;
+--------------------------------------------------------------------------------
+
+to check Check the Ratings Table:
+
+SELECT * FROM ratings LIMIT 10;
+---------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
